@@ -380,11 +380,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
     $state.is = function is(stateOrName, params) {
       var state = findState(stateOrName);
 
-      if (!isDefined(state)) {
-        return undefined;
-      }
-
-      if ($state.$current !== state) {
+      if (!isDefined(state) || $state.$current !== state) {
         return false;
       }
 
@@ -393,11 +389,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
 
     $state.includes = function includes(stateOrName, params) {
       var state = findState(stateOrName);
-      if (!isDefined(state)) {
-        return undefined;
-      }
-
-      if (!isDefined($state.$current.includes[state.name])) {
+      if (!isDefined(state) || !isDefined($state.$current.includes[state.name])) {
         return false;
       }
 

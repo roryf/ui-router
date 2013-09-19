@@ -390,8 +390,8 @@ describe('state', function () {
       expect($state.is(B)).toBe(false);
     }));
 
-    it('should return undefined when queried state does not exist', inject(function ($state) {
-      expect($state.is('Z')).toBeUndefined();
+    it('should return false when queried state does not exist', inject(function ($state) {
+      expect($state.is('Z')).toBe(false);
     }));
 
     it('should return true when the current state is passed with matching parameters', inject(function ($state, $q) {
@@ -417,8 +417,8 @@ describe('state', function () {
       expect($state.includes('about.sidebar')).toBe(false);
     }));
 
-    it('should return undefined when queried state does not exist', inject(function ($state) {
-      expect($state.includes('Z')).toBeUndefined();
+    it('should return false when queried state does not exist', inject(function ($state) {
+      expect($state.includes('Z')).toBe(false);
     }));
 
     it('should return true when the current state is passed with partial matching parameters', inject(function ($state, $q) {
