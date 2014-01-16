@@ -2,7 +2,7 @@
 
 #### The de-facto solution to flexible routing with nested views
 ---
-**[Download 0.2.0](http://angular-ui.github.io/ui-router/release/angular-ui-router.js)** (or **[Minified](http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js)**) **|**
+**[Download 0.2.8](http://angular-ui.github.io/ui-router/release/angular-ui-router.js)** (or **[Minified](http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js)**) **|**
 **[Learn](#resources) |**
 **[Discuss](https://groups.google.com/forum/#!categories/angular-ui/router) |**
 **[Get Help](http://stackoverflow.com/questions/ask?tags=angularjs,angular-ui-router) |**
@@ -26,14 +26,15 @@ to change. Using it in a project that requires guaranteed stability is not recom
 
 ## Get Started
 
-**(1)** Get UI-Router in one of 3 ways:
+**(1)** Get UI-Router in one of 4 ways:
  - clone & [build](#developing) this repository
  - [download the release](http://angular-ui.github.io/ui-router/release/angular-ui-router.js) (or [minified](http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js))
- - or via **[Bower](http://bower.io/)**: by running `$ bower install angular-ui-router` from your console
+ - via **[Bower](http://bower.io/)**: by running `$ bower install angular-ui-router` from your console
+ - or via **[Component](https://github.com/component/component)**: by running `$ component install angular-ui/ui-router` from your console
 
-**(2)** Include `angular-ui-router.js` (or `angular-ui-router.min.js`) in your `index.html`, after including Angular itself
+**(2)** Include `angular-ui-router.js` (or `angular-ui-router.min.js`) in your `index.html`, after including Angular itself (For Component users: ignore this step)
 
-**(3)** Add `'ui.router'` to your main module's list of dependencies
+**(3)** Add `'ui.router'` to your main module's list of dependencies (For Component users: replace `'ui.router'` with `require('angular-ui-router')`)
 
 When you're done, your setup should look similar to the following:
 
@@ -46,6 +47,8 @@ When you're done, your setup should look similar to the following:
     <script src="js/angular-ui-router.min.js"></script>
     <script>
         var myApp = angular.module('myApp', ['ui.router']);
+        // For Component users, it should look like this:
+        // var myApp = angular.module('myApp', [require('angular-ui-router')]);
     </script>
     ...
 </head>
@@ -130,7 +133,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('state1.list', {
       url: "/list",
-      templateUrl: "partials/1.list.html",
+      templateUrl: "partials/state1.list.html",
       controller: function($scope) {
         $scope.items = ["A", "List", "Of", "Items"];
       }
@@ -160,7 +163,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 
 Another great feature is the ability to have multiple `ui-view`s view per template.
 
-**Pro Tip:** *While mulitple parallel views are a powerful feature, you'll often be able to manage your
+**Pro Tip:** *While multiple parallel views are a powerful feature, you'll often be able to manage your
 interfaces more effectively by nesting your views, and pairing those views with nested states.*
 
 **(1)** Follow the [setup](#get-started) instructions detailed above.
@@ -173,15 +176,15 @@ interfaces more effectively by nesting your views, and pairing those views with 
     <div ui-view="viewA"></div>
     <div ui-view="viewB"></div>
     <!-- Also a way to navigate -->
-    <a ui-sref="state1">State 1</a>
-    <a ui-sref="state2">State 2</a>
+    <a ui-sref="route1">Route 1</a>
+    <a ui-sref="route2">Route 2</a>
 </body>
 ```
 
 **(3)** Set up your states in the module config:
 >
 ```javascript
-myApp.config(function($stateProvider, $routeProvider){
+myApp.config(function($stateProvider) {
   $stateProvider
     .state('index', {
       url: "",
@@ -213,11 +216,12 @@ myApp.config(function($stateProvider, $routeProvider){
 
 ## Resources
 
-* [In-Depth Overview](https://github.com/angular-ui/ui-router/wiki)
+* [In-Depth Guide](https://github.com/angular-ui/ui-router/wiki)
 * [API Quick Reference](https://github.com/angular-ui/ui-router/wiki/Quick-Reference)
 * [Sample App](http://angular-ui.github.com/ui-router/sample/) ([Source](https://github.com/angular-ui/ui-router/tree/master/sample))
 * [FAQ](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions)
-
+* [Introduction Video](http://egghead.io/lessons/angularjs-introduction-ui-router)
+* [Slides from CincyNg Meetup](http://slid.es/timkindberg/ui-router#/)
 
 ## Report an Issue
 
@@ -232,18 +236,20 @@ Next, [create a new issue](https://github.com/angular-ui/ui-router/issues/new) t
 and provides a bit of background as to the circumstances that triggered it. Don't forget to include the link to
 that plunkr you created!
 
-Finally, if you're unsure how a feature is used, or are encountering some unexpected behavior that you aren't sure
+**Note**: If you're unsure how a feature is used, or are encountering some unexpected behavior that you aren't sure
 is a bug, it's best to talk it out in the
 [Google Group](https://groups.google.com/forum/#!categories/angular-ui/router) or on
 [StackOverflow](http://stackoverflow.com/questions/ask?tags=angularjs,angular-ui-router) before reporting it. This
 keeps development streamlined, and helps us focus on building great software.
+
+Please keep in mind that the issue tracker is for *issues*. Please do *not* post an issue if you need help or support. Instead, see one of the above-mentioned forums or [IRC](irc://irc.freenode.net/#angularjs).
 
 
 ## Contribute
 
 **(1)** See the **[Developing](#developing)** section below, to get the development version of UI-Router up and running on your local machine.
 
-**(2)** Check out the [roadmap](https://github.com/angular-ui/ui-router/issues/milestones) to see where the project is headed, and if your feature idea fits with where we're headded.
+**(2)** Check out the [roadmap](https://github.com/angular-ui/ui-router/issues/milestones) to see where the project is headed, and if your feature idea fits with where we're headed.
 
 **(3)** If you're not sure, [open an RFC](https://github.com/angular-ui/ui-router/issues/new?title=RFC:%20My%20idea) to get some feedback on your idea.
 
@@ -251,6 +257,7 @@ keeps development streamlined, and helps us focus on building great software.
 
 - *Always* have test coverage for new features (or regression tests for bug fixes), and *never* break existing tests
 - Commits should represent one logical change each; if a feature goes through multiple iterations, squash your commits down to one
+- Make sure to follow the [Angular commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit-message-format) so your change will appear in the changelog of the next release.
 - Changes should always respect the coding style of the project
 
 
@@ -271,4 +278,3 @@ There are a number of targets in the gruntfile that are used to generating diffe
 * `grunt build`: Perform a normal build
 * `grunt dist`: Perform a clean build and generate documentation
 * `grunt dev`: Run dev server (sample app) and watch for changes, builds and runs karma tests on changes.
-
